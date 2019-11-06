@@ -1,0 +1,8 @@
+version: "Apple Swift version 5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
+options: "b1ebb17d17fc4eca1ab6c5c6f45ac99b"
+build_time: [1559185330, 589205000]
+inputs:
+  "/Users/nhnent/Desktop/SimpleHTMLStringConverter/SimpleHTMLStringConverter/SimpleHTMLParser.swift": [1559185329, 136263050]
+  "/Users/nhnent/Desktop/SimpleHTMLStringConverter/SimpleHTMLStringConverter/Utiles.swift": [1558332536, 330740429]
+  "/Users/nhnent/Desktop/SimpleHTMLStringConverter/SimpleHTMLStringConverter/UTF8StreamReader.swift": [1557994544, 38890420]
+  "/Users/nhnent/Desktop/SimpleHTMLStringConverter/SimpleHTMLStringConverter/SimpleHTMLConverter.swift": [1558333612, 84157489]

@@ -1,0 +1,4 @@
+framework module SimpleHTMLStringConverter {
+    header "SimpleHTMLStringConverter-Swift.h"
+    requires objc
+}
