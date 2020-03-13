@@ -17,6 +17,24 @@ public class SimpleHTMLConverter: NSObject, SimpleHTMLParserDelegate {
     var defaultAttributedString: [NSAttributedString.Key : Any]!
     var result: NSMutableAttributedString!
     
+    let colorAttrDict: [String : UIColor] = [
+        "black" : .black,
+        "darkGray" : .darkGray,
+        "lightGray" : .lightGray,
+        "white" : .white,
+        "gray" : .gray,
+        "red" : .red,
+        "green" : .green,
+        "blue" : .blue,
+        "cyan" : .cyan,
+        "yellow" : .yellow,
+        "magenta" : .magenta,
+        "orange" : .orange,
+        "purple" : .purple,
+        "brown" : .brown,
+        "clear" : .clear,
+    ]
+    
     @objc
     public func convertHTMLStringToAttributedString(htmlString: String, baseFont: UIFont, color: UIColor) -> NSAttributedString? {
         self.tagToeknStack = Stack()
@@ -39,7 +57,7 @@ public class SimpleHTMLConverter: NSObject, SimpleHTMLParserDelegate {
         
         return self.result
     }
-
+    
     func startTag(token: SimpleHTMLToken) {
         updateAttributeDict(token: token, attrDict: &currentAttributedString!)
         
@@ -71,8 +89,22 @@ public class SimpleHTMLConverter: NSObject, SimpleHTMLParserDelegate {
         case .font:
             for attrItem in token.attributes {
                 if attrItem.key == SimpleHTMLParserTagAttrName.color.rawValue {
-                    if let color = UIColor.convertHexStringToColor(hexString: attrItem.value, alpha: 1) {
-                        attrDict.updateValue(color, forKey: .foregroundColor)
+                    guard let firstValue = attrItem.value.first else {
+                        throwErrorWithMessageAndExitFlow(exceptionName: "AttributedBuilder", message: "value is empty \(attrItem.key)")
+                        
+                        return
+                    }
+                    
+                    if firstValue.isNumber || firstValue == "#" {
+                        if let color = UIColor.convertHexStringToColor(hexString: attrItem.value, alpha: 1) {
+                            attrDict.updateValue(color, forKey: .foregroundColor)
+                        }
+                    } else {
+                        if let color = colorAttrDict[attrItem.value] {
+                            attrDict.updateValue(color, forKey: .foregroundColor)
+                        } else {
+                            throwErrorWithMessageAndExitFlow(exceptionName: "AttributedBuilder", message: "unkown color \(attrItem.value)")
+                        }
                     }
                 } else if attrItem.key == SimpleHTMLParserTagAttrName.size.rawValue {
                     if let font = attrDict[.font] as? UIFont {

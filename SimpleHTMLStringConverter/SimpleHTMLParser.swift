@@ -150,11 +150,12 @@ class SimpleHTMLParserStateTransitionTable {
                                                       "\"" : SimpleHTMLParserStateV2.collectAttrValue,
                                                       " " : SimpleHTMLParserStateV2.startCollectingAttrValue]
     
-    static let collectAttrValue: TableType = ["#" : SimpleHTMLParserStateV2.collectAttrValue,
-                                              " " : SimpleHTMLParserStateV2.collectAttrValue,
-                                              "\\" : SimpleHTMLParserStateV2.collectAttrValue,
+    static let collectAttrValue: TableType = ["\\" : SimpleHTMLParserStateV2.collectAttrValue,
+                                              " " : SimpleHTMLParserStateV2.confirmMoreAttribute,
                                               "'" : SimpleHTMLParserStateV2.confirmMoreAttribute,
-                                              "\"" : SimpleHTMLParserStateV2.confirmMoreAttribute]
+                                              "\"" : SimpleHTMLParserStateV2.confirmMoreAttribute,
+                                              "/" : SimpleHTMLParserStateV2.selfCloseTag,
+                                              ">" : SimpleHTMLParserStateV2.collectText]
     
     static let confirmMoreAttribute: TableType = [" " : SimpleHTMLParserStateV2.collectAttrKey,
                                                   "/" : SimpleHTMLParserStateV2.selfCloseTag,
@@ -312,7 +313,9 @@ class SimpleHTMLParser {
                 if let nextState = transitionTable?[_nextString] {
                     currentState = nextState
                 } else {
-                    throwErrorWithMessageAndExitFlow(exceptionName: "StartCollectingAttrValue", message: "unkown tag name input character " + _nextString)
+                    attrValue.append(_nextString)
+                    
+                    currentState = SimpleHTMLParserStateV2.collectAttrValue
                 }
             case .collectAttrValue:
                 if let nextState = transitionTable?[_nextString] {
@@ -320,10 +323,17 @@ class SimpleHTMLParser {
                         token.attributes.updateValue(attrValue.lowercased(), forKey: attrName.lowercased())
                         attrValue = ""
                         attrName = ""
+                    } else if nextState == .collectText {
+                        token.attributes.updateValue(attrValue.lowercased(), forKey: attrName.lowercased())
+                        attrValue = ""
+                        attrName = ""
+                        
+                        endTagAction()
                     }
                     
                     currentState = nextState
-                } else {
+                }
+                else {
                     attrValue.append(_nextString)
                 }
             case .confirmMoreAttribute:
