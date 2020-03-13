@@ -4,23 +4,23 @@
   'roots': [
     {
       'type': 'directory',
-      'name': "/Users/nhnent/Library/Developer/Xcode/DerivedData/SimpleHTMLStringConverter-dmalimwsevtkreakaexkpdlovleu/Build/Products/Debug-iphoneos/SimpleHTMLStringConverter.framework/Headers",
+      'name': "/Users/nhnent/Documents/SimpleHTMLParser/build/Debug-iphoneos/SimpleHTMLStringConverter.framework/Headers",
       'contents': [
         {
           'type': 'file',
           'name': "SimpleHTMLStringConverter-Swift.h",
-          'external-contents': "/Users/nhnent/Library/Developer/Xcode/DerivedData/SimpleHTMLStringConverter-dmalimwsevtkreakaexkpdlovleu/Build/Products/Debug-iphoneos/SimpleHTMLStringConverter.framework/Headers/SimpleHTMLStringConverter-Swift.h"
+          'external-contents': "/Users/nhnent/Documents/SimpleHTMLParser/build/Debug-iphoneos/SimpleHTMLStringConverter.framework/Headers/SimpleHTMLStringConverter-Swift.h"
         }
       ]
     },
     {
       'type': 'directory',
-      'name': "/Users/nhnent/Library/Developer/Xcode/DerivedData/SimpleHTMLStringConverter-dmalimwsevtkreakaexkpdlovleu/Build/Products/Debug-iphoneos/SimpleHTMLStringConverter.framework/Modules",
+      'name': "/Users/nhnent/Documents/SimpleHTMLParser/build/Debug-iphoneos/SimpleHTMLStringConverter.framework/Modules",
       'contents': [
         {
           'type': 'file',
           'name': "module.modulemap",
-          'external-contents': "/Users/nhnent/Desktop/SimpleHTMLStringConverter/build/SimpleHTMLStringConverter.build/Debug-iphoneos/SimpleHTMLStringConverter.build/module.modulemap"
+          'external-contents': "/Users/nhnent/Documents/SimpleHTMLParser/build/SimpleHTMLStringConverter.build/Debug-iphoneos/SimpleHTMLStringConverter.build/module.modulemap"
         }
       ]
     }

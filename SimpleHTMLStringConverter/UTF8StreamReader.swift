@@ -108,7 +108,6 @@ class UTF8StreamReader {
         var result = false
         
         if inputStream.hasBytesAvailable {
-            inputStream.read
             let readCount = inputStream.read(buffer, maxLength: bufferSize)
             
             bufferArray = Array(UnsafeBufferPointer(start: buffer, count: readCount))
